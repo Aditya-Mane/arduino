@@ -1,0 +1,21 @@
+#include <PinChangeInterrupt.h>
+#define BUTTON_PIN 7
+#define LED_PIN 5
+
+void setup() {
+  // set pin to input with a pullup, led to output
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  // Attach the new PinChangeInterrupt and enable event function below
+  attachPCINT(digitalPinToPCINT(BUTTON_PIN), toggle_LED, FALLING);
+}
+
+void toggle_LED(void) {
+  // Switch Led state
+  digitalWrite(LED_PIN, 1^digitalRead(LED_PIN));
+}
+
+void loop() {
+  // Nothing to do here
+}
